@@ -1,2 +1,2 @@
 # auth.tests
-trying authwith different techs
+trying auth with different techs
