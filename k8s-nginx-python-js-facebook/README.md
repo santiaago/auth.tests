@@ -4,10 +4,11 @@
 
 ```bash
 pwd
-~/auth.tests/k8s-nginx-python-js-facebook/www
+~/auth.tests/k8s-nginx-python-js-facebook/
 minikube start
 minikube addons enable ingress
 eval $(minikube docker-env)
+cd www
 docker build -f ./nginx/Dockerfile -t app/www:test --build-arg NGINX_CONFIG=nginx/test.conf .
 docker build -f ./web-api/Dockerfile -t app/web-api:test .
 cd ..
