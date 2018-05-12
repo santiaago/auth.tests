@@ -3,7 +3,7 @@
 ```bash
 ➜ minikube start
 ➜ pwd
-    ~/auth.tests/app-002/www
+    ~/fleet/app-002/www
 ➜ cd app
 ➜ yarn
 ➜ yarn build

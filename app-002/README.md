@@ -6,7 +6,7 @@ kubernetes nginx python js facebook
 
 ```bash
 pwd
-~/auth.tests/app-002/
+~/fleet/app-002/
 minikube start
 minikube addons enable ingress
 eval $(minikube docker-env)
@@ -37,7 +37,7 @@ frontend runs with a proxy to `8081` in development. see [](.www/app/package.jso
 
 ```bash
 pwd
-~/auth.tests/app-002/www/app
+~/fleet/app-002/www/app
 yarn
 yarn start
 ```
@@ -46,7 +46,7 @@ web api
 
 ```bash
 pwd
-auth.tests/app-002/www/web-api/src
+fleet/app-002/www/web-api/src
 gunicorn -b 0.0.0.0:8081 \
     --forwarded-allow-ips=* \
     --log-file - \
