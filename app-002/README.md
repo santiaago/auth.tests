@@ -47,6 +47,8 @@ web api
 ```bash
 pwd
 fleet/app-002/www/web-api/src
+export FACEBOOK_OAUTH_CLIENT_SECRET=yoursecret
+export FACEBOOK_OAUTH_CLIENT_ID=yourclientid
 gunicorn -b 0.0.0.0:8081 \
     --forwarded-allow-ips=* \
     --log-file - \
