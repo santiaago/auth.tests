@@ -11,6 +11,7 @@ class App extends Component {
       version: 'na',
       loggedIn: false,
       username: null,
+      message: null,
     }
     this.fetchVersion = this.fetchVersion.bind(this)
     this.fetchUser = this.fetchUser.bind(this)
@@ -26,13 +27,17 @@ class App extends Component {
       },
       credentials: 'same-origin'
     })
-      .then(r => {
-        if(r.status === 200)
+    .then(r => {
+      if(r.status === 200){
         return r.json()
-      })
-      .then(json => {
-        this.setState({version: json.version})
-      })
+      }
+    })
+    .then(json => {
+      this.setState({version: json.version})
+    })
+    .catch(ex =>{
+      console.error(ex)
+    })
   }
 
   fetchUser = () => {
@@ -46,13 +51,14 @@ class App extends Component {
     }).then(response => {
         if(response.status !== 200){
           this.setState({message: 'user not authenticated'})
+          throw new Error('user not authenticated')
         } else {
           return response.json()
         }
     }).then(json => {
       this.setState({loggedIn: true, username: json.username })
     }).catch((ex) => {
-      console.log(ex)
+      console.error(ex)
       this.setState({message: 'user authentication failed'})
     })
   }
