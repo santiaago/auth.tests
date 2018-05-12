@@ -3,7 +3,7 @@
 ```bash
 ➜ minikube start
 ➜ pwd
-    ~/auth.tests/k8s-nginx-python-js-facebook/www
+    ~/auth.tests/app-001/www
 ➜ cd app
 ➜ yarn
 ➜ yarn build
