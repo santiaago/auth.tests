@@ -12,4 +12,7 @@ cd ..
 helm install stable/nginx-ingress -n nginxingress --values ./nginx-ingress/nginx-ingress-values-dev.yaml
 cd www
 helm install ./www.app.com/ -n www.app.com
+echo "$(minikube ip) www.minikube-app.com" | sudo tee -a /etc/hosts
+kubectl get services | grep ingress-controller
+curl -I www.minikube-app.com:30859
 ```
