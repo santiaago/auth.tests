@@ -1,5 +1,7 @@
 # k8s nginx python js facebook
 
+## run in minikube
+
 ```bash
 pwd
 ~/auth.tests/k8s-nginx-python-js-facebook/www
@@ -22,4 +24,29 @@ to delete
 ```bash
 helm delete www.app.com --purge
 helm delete nginxingress --purge
+```
+
+## run in dev
+
+frontend:
+
+frontend runs with a proxy to `8081` in development. see [](.www/app/package.json)
+
+```bash
+pwd
+~/auth.tests/k8s-nginx-python-js-facebook/www/app
+yarn
+yarn start
+```
+
+web api
+
+```bash
+pwd
+auth.tests/k8s-nginx-python-js-facebook/www/web-api/src
+gunicorn -b 0.0.0.0:8081 \
+    --forwarded-allow-ips=* \
+    --log-file - \
+    --log-level debug \
+    server:app
 ```
