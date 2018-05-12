@@ -16,3 +16,10 @@ echo "$(minikube ip) www.minikube-app.com" | sudo tee -a /etc/hosts
 kubectl get services | grep ingress-controller
 curl -I www.minikube-app.com:30859
 ```
+
+to delete
+
+```bash
+helm delete www.app.com --purge
+helm delete nginxingress --purge
+```
