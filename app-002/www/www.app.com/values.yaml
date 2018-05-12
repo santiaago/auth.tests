@@ -1,0 +1,12 @@
+nginx:
+  name: www-app
+  listenPort: 80
+  image:
+    repository: app/www
+    tag: test
+api:
+  name: api-app
+  listenPort: 80
+  image:
+    repository: app/web-api
+    tag: test
