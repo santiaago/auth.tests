@@ -9,6 +9,7 @@ from time import strftime
 from flask import Flask
 from flask import request
 from flask import session
+from flask.ext.session import Session
 
 from flask_login import LoginManager
 
@@ -18,8 +19,7 @@ import config
 
 app = Flask('app')
 app.secret_key = 'a secret.'
-
-session['db'] = FakeDatabase()
+Session(app)
 
 import controllers.auth as controllers_auth
 import controllers.versions as controllers_versions
@@ -45,6 +45,11 @@ login_manager.login_view = '/'
 controllers_auth.init_auth_controller(app, login_manager)
 
 app.add_url_rule('/api/version', view_func = controllers_versions.get_version, methods=['GET'])
+
+@app.before_first_request
+def init_database():
+    if not session['db']:
+        session['db'] = FakeDatabase()
 
 @app.after_request
 def after_request(response):
