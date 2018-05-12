@@ -21,7 +21,7 @@ class App extends Component {
       credentials: 'same-origin'
     })
       .then(r => {
-        if(r.status == 200)
+        if(r.status === 200)
         return r.json()
       })
       .then(json => {
