@@ -18,7 +18,8 @@ from database.fake_database import FakeDatabase
 import config
 
 app = Flask('app')
-app.secret_key = 'a secret.'
+app.secret_key = 'a secret'
+app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
 import controllers.auth as controllers_auth
@@ -48,7 +49,7 @@ app.add_url_rule('/api/version', view_func = controllers_versions.get_version, m
 
 @app.before_first_request
 def init_database():
-    if not session['db']:
+    if 'db' not in session.keys():
         session['db'] = FakeDatabase()
 
 @app.after_request
