@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ .Values.nginx.name }}-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  {{ if not (eq .Values.nginx.image.tag "test") }}
+  tls:
+    - hosts:
+      - www.app.com
+  {{ end }}
+  rules:
+  {{ if not (eq .Values.nginx.image.tag "test") }}
+  - host: www.app.com
+  {{ else }}
+  - host: www.minikube-app.com
+  {{ end }}
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: {{ .Values.nginx.name }}
+          servicePort: {{ .Values.nginx.listenPort }}

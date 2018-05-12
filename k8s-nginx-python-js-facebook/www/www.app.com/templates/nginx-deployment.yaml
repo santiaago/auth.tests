@@ -1,0 +1,26 @@
+
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: {{ .Values.nginx.name }}
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.nginx.name }}
+    spec:
+      containers:
+      - name: {{ .Values.nginx.name }}
+        image: {{ .Values.nginx.image.repository }}:{{ .Values.nginx.image.tag }}
+        command: ["/bin/bash"] 
+        args: ["/setup.sh"]
+        env:
+        - name: NGINX_TEMPLATE
+          value: test.conf
+        - name: API_HOST
+          value: "{{ .Values.api.name }}"
+        - name: API_HOST_PORT
+          value: "{{ .Values.api.listenPort }}"
+        ports:
+        - containerPort: {{ .Values.nginx.listenPort }}

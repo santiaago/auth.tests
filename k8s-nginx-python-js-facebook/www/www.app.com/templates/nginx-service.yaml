@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.nginx.name }}
+spec:
+  selector:
+    app: {{ .Values.nginx.name }}
+  ports:
+  - name: http
+    protocol: TCP
+    port: {{ .Values.nginx.listenPort }}
+    targetPort: 
+  type: NodePort
