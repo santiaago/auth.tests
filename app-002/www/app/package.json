@@ -22,6 +22,10 @@
     "/login(.*)": {
       "target": "http://localhost:8081",
       "ws": true
+    },
+    "/callback(.*)": {
+      "target": "http://localhost:8081",
+      "ws": true
     }
   }
 }
