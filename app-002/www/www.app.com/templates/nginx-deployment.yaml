@@ -16,11 +16,11 @@ spec:
         command: ["/bin/bash"] 
         args: ["/setup.sh"]
         env:
-        - name: NGINX_TEMPLATE
-          value: test.conf
-        - name: API_HOST
-          value: "{{ .Values.api.name }}"
-        - name: API_HOST_PORT
-          value: "{{ .Values.api.listenPort }}"
+          - name: NGINX_TEMPLATE
+            value: test.conf
+          - name: API_HOST
+            value: "{{ .Values.api.name }}"
+          - name: API_HOST_PORT
+            value: "{{ .Values.api.listenPort }}"
         ports:
         - containerPort: {{ .Values.nginx.listenPort }}
