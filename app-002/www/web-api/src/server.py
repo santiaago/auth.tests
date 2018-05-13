@@ -9,7 +9,9 @@ from time import strftime
 from flask import Flask
 from flask import request
 from flask import session
-from flask.ext.session import Session
+from flask import current_app
+
+from flask_caching import Cache
 
 from flask_login import LoginManager
 
@@ -19,8 +21,8 @@ import config
 
 app = Flask('app')
 app.secret_key = 'a secret'
-app.config['SESSION_TYPE'] = 'filesystem'
-Session(app)
+app.config['CACHE_TYPE'] = 'simple'
+app.cache = Cache(app)
 
 import controllers.auth as controllers_auth
 import controllers.versions as controllers_versions
@@ -48,8 +50,11 @@ app.add_url_rule('/api/version', view_func = controllers_versions.get_version, m
 
 @app.before_first_request
 def init_database():
-    if 'db' not in session.keys():
-        session['db'] = FakeDatabase()
+    app.logger.info('init database')
+    db = current_app.cache.get('db')
+    if db is None:
+        app.logger.info('setting database in cache')
+        current_app.cache.set('db', FakeDatabase())
 
 @app.after_request
 def after_request(response):

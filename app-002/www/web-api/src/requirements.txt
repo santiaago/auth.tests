@@ -3,6 +3,7 @@ Flask-Cors==2.1.2
 Flask-Dance==0.14.0
 Flask-Login==0.4.1
 Flask-Session==0.3.1
+Flask-Caching==1.4.0
 gunicorn==19.3.0
 requests==2.18.4
 wheel==0.29.0
