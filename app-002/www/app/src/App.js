@@ -76,6 +76,7 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
         {this.state.loggedIn? null: <a href='/login/facebook'>login</a>}
+        {this.state.loggedIn? <a href='/logout'>logout</a>: null}
       </div>
     )
   }
