@@ -12,8 +12,14 @@ spec:
       containers:
       - name: {{ .Values.api.name }}
         image: {{ .Values.api.image.repository }}:{{ .Values.api.image.tag }}
-      env:
-      - name: PORT
-        value: {{ .Values.api.listenPort }}
-      ports:
-      - containerPort: {{ .Values.api.listenPort }}
+        env:
+          - name: PORT
+            value: "{{ .Values.api.listenPort }}"
+          - name: FACEBOOK_OAUTH_CLIENT_ID
+            value: "clientid"
+          - name: FACEBOOK_OAUTH_CLIENT_SECRET
+            value: "clientsecret"
+          - name: OAUTHLIB_INSECURE_TRANSPORT
+            value: "1"
+        ports:
+          - containerPort: {{ .Values.api.listenPort }}
