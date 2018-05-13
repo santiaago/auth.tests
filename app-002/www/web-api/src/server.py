@@ -35,10 +35,9 @@ if not config_name in config.config:
 app.config.from_object(config.config[config_name])
 config.config[config_name].init_app(app)
 
-if app.config['DEBUG']:
-    app.logger.setLevel(logging.DEBUG)
-else:
-    app.logger.setLevel(logging.INFO)
+gunicorn_logger = logging.getLogger('gunicorn.error')
+app.logger.handlers = gunicorn_logger.handlers
+app.logger.setLevel(gunicorn_logger.level)
 
 login_manager = LoginManager(app)
 login_manager.login_view = '/'
