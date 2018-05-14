@@ -8,20 +8,12 @@ from time import strftime
 
 from flask import Flask
 from flask import request
-from flask import session
-from flask.ext.session import Session
-
-from flask_login import LoginManager
-
-from database.fake_database import FakeDatabase
 
 import config
 
 app = Flask('app')
 app.secret_key = 'a secret.'
-Session(app)
 
-import controllers.auth as controllers_auth
 import controllers.versions as controllers_versions
 
 config_name = getenv('FLASK_CONFIG', 'dev')
@@ -39,17 +31,7 @@ if app.config['DEBUG']:
 else:
     app.logger.setLevel(logging.INFO)
 
-login_manager = LoginManager(app)
-login_manager.login_view = '/'
-
-controllers_auth.init_auth_controller(app, login_manager)
-
 app.add_url_rule('/api/version', view_func = controllers_versions.get_version, methods=['GET'])
-
-@app.before_first_request
-def init_database():
-    if not session['db']:
-        session['db'] = FakeDatabase()
 
 @app.after_request
 def after_request(response):
