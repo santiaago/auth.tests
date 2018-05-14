@@ -5,6 +5,8 @@ The react application logs in using Facebook authentication through the web api.
 
 ## run in minikube
 
+you will need to update file at `app-002/www/www.app.com/templates/api-deployment.yaml` with your client id and secret
+
 ```bash
 ➜ pwd
 ~/auth.tests/app-002/
