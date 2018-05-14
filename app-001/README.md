@@ -1,7 +1,16 @@
 # app-001
 
-A kubernetes cluster with an nginx ingress, a react application and a python web api.
-The react app calls a the web server at `/api/version`.
+A kubernetes cluster with an **nginx ingress**, a **react application** and a **python web api**.
+The react app (`www-app-*`) calls the web server api (`api-app-*`) at `/api/version`.
+
+```bash
+➜ kubectl get pods
+NAME                                                         READY     STATUS    RESTARTS   AGE
+api-app-764b687f7d-nz22x                                     1/1       Running   0          5s
+nginxingress-nginx-ingress-controller-f8947f46c-pbvkx        1/1       Running   0          1m
+nginxingress-nginx-ingress-default-backend-5459bb66d-b4gb9   1/1       Running   0          1m
+www-app-5dfb7ccc58-j9kmv                                     1/1       Running   0          5s
+```
 
 ## run in minikube
 
