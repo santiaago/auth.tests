@@ -1,8 +1,6 @@
 {{ if not (eq .Values.nginx.image.tag "test" ) }}
 USE THE APP:
-The application is hosted in AWS and behind an Elastic Load Balancer.
-
-Alternatively, if Route 53 DNS has already been configured to redirect to the load balancer, then just navigate to tracker.redgatefoundry.com to see the latest changes.
+The application is hosted in AWS.
 
 {{ else }}
 USE THE APP:
